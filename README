@@ -1,0 +1,30 @@
+Fake Song Titles
+
+This site was inspired by a comment from Gideon Coe (http://www.bbc.co.uk/programmes/b0072l9v)
+on one of his excellent shows on BBC Radio 6 Music in November 2011. 
+
+He was playing tracks by Captain Beefheart (Don Van Vliet) who always chose creative, seemingly 
+nonsensical, titles for his songs. Gideon commented that if there was not already a fake 
+Captain Beefheart song title generator on the Internet, then there should be.
+
+Well, there wasn't... so now there is
+
+
+If you are curious about the software behind this site you can find it at 
+GitHub (https://github.com/craic/fake_song_titles). It is written in Ruby as a Sinatra app and
+is hosted on Heroku (http://heroku.com). The code is freely available so go ahead and clone it if
+you feel so inclined.
+
+
+The generation algorithm is extremely simple. Verbs, adjectives and nouns were extracted from lists of
+real Captain Beefheart song titles and then I added other words that seemed appropriate - as well as few that
+are totally unrelated and that were added just for fun.	
+
+Many of the real song titles follow simple patterns - two nouns, an adjective and a noun, etc. The code
+picks words at random from the lists and joins them according to the patterns. Most of them
+are nonsense but some would make pretty good Beefheart titles.
+
+The approach might also be applied to other artists - The Fall, Mogwai and Underworld are three that
+come to mind right away. I shall investigate.
+
+The code was written by Rob Jones in Seattle, WA - who should now really get back to more meaningful work...
