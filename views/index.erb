@@ -1,14 +1,90 @@
-<p  style="text-align: center">Song titles that might have been written by Captain Beefheart - but weren't</p>
+<p  style="text-align: center">Song titles that could have been written by Captain Beefheart - but weren't</p>
 
 <p  style="text-align: center"><img src="images/beefheart.jpg" 
 	title="Photo of Beefheart - unknown origin - possibly Anton Corbijn?"
 	alt="Photo of Beefheart - unknown origin - possibly Anton Corbijn?"
 	></p>
 
-<div class='titles-div'>
-<% @titles.each do |title| %>
-	<p><%= title %></p>
-<% end %>
+<div id='msg'></div>
 
-<p><a href="/" style="text-decoration: none">more...</a></p>
+<div class='titles-div'>
+<ul id='title-list'>	
+<% @titles.each do |title| %>
+	<li><%= title %></li>
+<% end %>
+</ul>
 </div>
+
+<script>
+
+	var t = 0;
+	var count = 0;
+	var max_count = 30;
+	
+	$(document).ready(function() { update_title(); });
+
+	// fetch text from the server, wait 5 secs and repeat
+	function update_title() {
+	  $.get("/update", function(data) {
+		count += 1;
+		if(count < max_count) {
+			smoothAdd('title-list', data);
+	    	t = window.setTimeout(update_title, 3000);
+		} else {
+			window.clearTimeout(t);
+			$("#msg").html("That's your lot ... get back to work ...");
+			$("#msg").show();
+		}
+	  });
+	};
+	
+	// This function came from http://www.fiveminuteargument.com/blog/scrolling-list (author Bobby Jack)
+	function smoothAdd(id, text) {
+		var el = $('#' + id);
+
+		var h = el.height();
+
+		el.css({
+			height:   h,
+			overflow: 'hidden'
+		});
+
+		var ulPaddingTop    = parseInt(el.css('padding-top'));
+		var ulPaddingBottom = parseInt(el.css('padding-bottom'));
+
+		el.prepend('<li>' + text + '</li>');
+
+		var first = $('li:first', el);
+		var last  = $('li:last',  el);
+
+		var foh = first.outerHeight();
+
+		var heightDiff = foh - last.outerHeight();
+
+		var oldMarginTop = first.css('margin-top');
+
+		first.css({
+			marginTop: 0 - foh,
+			position:  'relative',
+			top:       0 - ulPaddingTop
+		});
+
+		last.css('position', 'relative');
+
+		el.animate({ height: h + heightDiff }, 1500)
+
+		first.animate({ top: 0 }, 250, function() {
+			first.animate({ marginTop: oldMarginTop }, 1000, function() {
+				last.animate({ top: ulPaddingBottom }, 250, function() {
+					last.remove();
+
+					el.css({
+						height:   'auto',
+						overflow: 'visible'
+					});
+				});
+			});
+		});
+	}
+	
+</script>

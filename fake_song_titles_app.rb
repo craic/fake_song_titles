@@ -6,7 +6,7 @@
 # This code and associated data files are distributed freely under the terms of the MIT license
 
 # Initially this is a Fake Captain Beefheart Song Title Generator
-# Based on a comment of Gideon Coe on BBC 6Music in November 2011 regarding the odd song titles
+# Based on a comment of Gideon Coe on BBC 6 Music in November 2011 regarding the odd song titles
 # of Captain Beefheart (Don Van Vliet). Gideon commented that there should be a Beefheart song title
 # generator ... and so now there is ...
 
@@ -63,6 +63,26 @@ def pick_two_nouns_and_verb(nouns, verbs)
   "#{word0} #{verb} #{word1}"
 end
 
+
+def generate_titles(n_titles, nouns, verbs, adjectives, linkages)
+  titles = Array.new
+  (0...n_titles).each do |i|
+    j = rand(5)
+    if j == 0
+      titles << pick_two_nouns_and_linkage(nouns, linkages)
+    elsif j == 1
+      titles << pick_two_nouns(nouns)
+    elsif j == 2
+      titles << pick_adjective_and_noun(nouns, adjectives)
+    elsif j == 3
+      titles << pick_two_nouns_adjective_and_linkage(nouns, adjectives, linkages)
+    else
+      titles << pick_two_nouns_and_verb(nouns, verbs)
+    end
+  end
+  titles
+end
+
 # MAIN -----------------------------------------------------------------
 
 
@@ -83,15 +103,8 @@ class FakeSongTitlesApp < Sinatra::Base
   linkages = load_words(linkages_file)
 
   get '/' do
-    n_titles = 1
-    @titles = Array.new
-    (0...n_titles).each do |i|
-      @titles << pick_two_nouns_and_linkage(nouns, linkages)
-      @titles << pick_two_nouns(nouns)
-      @titles << pick_adjective_and_noun(nouns, adjectives)
-      @titles << pick_two_nouns_adjective_and_linkage(nouns, adjectives, linkages)
-      @titles << pick_two_nouns_and_verb(nouns, verbs)
-    end
+    n_titles = 5
+    @titles = generate_titles(n_titles, nouns, verbs, adjectives, linkages)
     erb :index
   end
 
@@ -99,4 +112,11 @@ class FakeSongTitlesApp < Sinatra::Base
     erb :about
   end
 
+  get '/update' do
+    n_titles = 1
+    titles = generate_titles(n_titles, nouns, verbs, adjectives, linkages)
+    @title = titles[0]
+    @title
+  end
+  
 end

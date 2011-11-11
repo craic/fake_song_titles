@@ -33,7 +33,7 @@ Venus
 Corpse
 Blabber
 Smoke
-Bluejeans
+Blue jeans
 Moonbeams
 Boogie Woogie
 Me
@@ -129,7 +129,8 @@ Sun
 Spark
 
 Bulbs
-Tarotplane
+Tarot
+plane
 Telephone
 Blimp
 Clouds
@@ -208,9 +209,6 @@ rooster
 chicken
 straw
 
-bbc
-gideon
-
 taco
 seagull
 
@@ -233,7 +231,7 @@ walkout
 blackjack
 swimmer
 
-engine mount
+engine
 tabasco
 
 monkey
@@ -270,6 +268,21 @@ backlash
 mumbo
 jumbo
 
+vodka
+salsa
+rip rap
 
+taco
+bedstead
 
+bonfire
+beano
+
+airship
+bongo
+haddock
+rock
+block
+clock
+knock
 

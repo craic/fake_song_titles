@@ -75,6 +75,34 @@ a:hover { color: #b74; }
 	margin-right: auto;	
 }
 
+
+#title-list {
+	list-style: none;
+//	border: 1px solid blue;	
+	padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+#title-list li {
+	list-style: none;
+//	border: 1px solid white;
+	padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+
+#msg {
+	border: 1px solid red;
+	padding: 1em;
+	color: red;
+	background-color: white;
+	text-align: center;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+
 .about {
 	text-align: center;
 	width: 70%;
