@@ -6,6 +6,7 @@
 	></p>
 
 <div id='msg'></div>
+<div id='debug'></div>
 
 <div class='titles-div'>
 <ul id='title-list'>	
@@ -80,6 +81,7 @@
 	  $.get("/update", function(text) {
 		count = count + 1;
 		if(count < max_count) {
+			$("#debug").html(text);
 			smoothAdd('title-list', text);
 //	    	t = window.setTimeout(update_title, 3000);
 	    	t = setTimeout(update_title, 3000);
