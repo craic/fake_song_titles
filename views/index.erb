@@ -23,6 +23,10 @@
 	var max_count = 30;
 	var text = '';
 
+    $.ajaxSetup ({  
+        cache: false  
+    }); 
+
 	// This function came from http://www.fiveminuteargument.com/blog/scrolling-list (author Bobby Jack)
 	function smoothAdd(id, text) {
 		var el = $('#' + id);
@@ -77,23 +81,41 @@
 	$(document).ready(function() { update_title(); });
 
 	// fetch text from the server, wait 5 secs and repeat
+	function update_title_ajax() {
+	  $.ajax( {
+		type: 'GET',
+		url: "/update", 
+		dataType: 'text',
+		cache: false,
+		complete: 	function(text) {
+				count = count + 1;
+				if(count < max_count) {
+					$("#debug").html(text);
+					smoothAdd('title-list', text);
+			    	t = setTimeout(update_title, 3000);
+				} else {
+					clearTimeout(t);
+					$("#msg").html("That's your lot ... get back to work ...").show();
+				}
+	  		}
+	
+		});
+	};
+	
+
 	function update_title() {
 	  $.get("/update", function(text) {
 		count = count + 1;
 		if(count < max_count) {
 			$("#debug").html(text);
 			smoothAdd('title-list', text);
-//	    	t = window.setTimeout(update_title, 3000);
 	    	t = setTimeout(update_title, 3000);
 		} else {
-//			window.clearTimeout(t);
 			clearTimeout(t);
-			$("#msg").html("That's your lot ... get back to work ...");
-			$("#msg").show();
+			$("#msg").html("That's your lot ... get back to work ...").show();
 		}
 	  }, 'text'
 		);
 	};
-	
 	
 </script>
