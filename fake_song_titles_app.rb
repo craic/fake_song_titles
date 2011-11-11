@@ -116,7 +116,7 @@ class FakeSongTitlesApp < Sinatra::Base
     n_titles = 1
     titles = generate_titles(n_titles, nouns, verbs, adjectives, linkages)
     @title = titles[0]
-    content_type 'text/plain'
+#    content_type 'text/plain'
     @title
   end
   
