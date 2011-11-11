@@ -20,24 +20,8 @@
 	var t = 0;
 	var count = 0;
 	var max_count = 30;
-	
-	$(document).ready(function() { update_title(); });
+	var text = '';
 
-	// fetch text from the server, wait 5 secs and repeat
-	function update_title() {
-	  $.get("/update", function(data) {
-		count += 1;
-		if(count < max_count) {
-			smoothAdd('title-list', data);
-	    	t = window.setTimeout(update_title, 3000);
-		} else {
-			window.clearTimeout(t);
-			$("#msg").html("That's your lot ... get back to work ...");
-			$("#msg").show();
-		}
-	  });
-	};
-	
 	// This function came from http://www.fiveminuteargument.com/blog/scrolling-list (author Bobby Jack)
 	function smoothAdd(id, text) {
 		var el = $('#' + id);
@@ -49,8 +33,8 @@
 			overflow: 'hidden'
 		});
 
-		var ulPaddingTop    = parseInt(el.css('padding-top'));
-		var ulPaddingBottom = parseInt(el.css('padding-bottom'));
+		var ulPaddingTop    = parseInt(el.css('padding-top'), 10);
+		var ulPaddingBottom = parseInt(el.css('padding-bottom'), 10);
 
 		el.prepend('<li>' + text + '</li>');
 
@@ -86,5 +70,25 @@
 			});
 		});
 	}
+
+
+	
+	$(document).ready(function() { update_title(); });
+
+	// fetch text from the server, wait 5 secs and repeat
+	function update_title() {
+	  $.get("/update", function(text) {
+		count = count + 1;
+		if(count < max_count) {
+			smoothAdd('title-list', text);
+	    	t = window.setTimeout(update_title, 3000);
+		} else {
+			window.clearTimeout(t);
+			$("#msg").html("That's your lot ... get back to work ...");
+			$("#msg").show();
+		}
+	  });
+	};
+	
 	
 </script>
