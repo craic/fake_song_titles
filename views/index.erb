@@ -81,9 +81,11 @@
 		count = count + 1;
 		if(count < max_count) {
 			smoothAdd('title-list', text);
-	    	t = window.setTimeout(update_title, 3000);
+//	    	t = window.setTimeout(update_title, 3000);
+	    	t = setTimeout(update_title, 3000);
 		} else {
-			window.clearTimeout(t);
+//			window.clearTimeout(t);
+			clearTimeout(t);
 			$("#msg").html("That's your lot ... get back to work ...");
 			$("#msg").show();
 		}
