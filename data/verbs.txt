@@ -34,10 +34,14 @@ Know
 #---------------------------
 
 hold
+held
 crashed
 play
 
 drives
+drive
+sing
 sings
-
 swings
+gone
+made
